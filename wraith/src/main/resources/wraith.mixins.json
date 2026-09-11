@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "com.wraith.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "MixinMinecraftClient",
+    "MixinInGameHud",
+    "MixinGameRenderer",
+    "MixinMouse",
+    "MixinCamera"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

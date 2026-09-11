@@ -1,0 +1,35 @@
+plugins {
+    id 'fabric-loom' version '1.17.20'
+    id 'java'
+}
+
+version = project.version
+group = project.group
+
+base { archivesName = 'wraith' }
+
+repositories {
+    mavenCentral()
+    maven { url = 'https://maven.fabricmc.net/' }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    // Deliberately no Fabric API: the entrypoint comes from loader, and every hook is a mixin.
+}
+
+java {
+    toolchain { languageVersion = JavaLanguageVersion.of(21) }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.release = 21
+    options.encoding = 'UTF-8'
+}
+
+processResources {
+    inputs.property 'version', project.version
+    filesMatching(['fabric.mod.json']) { expand 'version': project.version }
+}
